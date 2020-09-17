@@ -72,7 +72,7 @@ namespace AgendaUI
 
                 client.Nome = txtNome.Text.Trim();
                 client.Rg = txtRg.Text.Trim();
-                client.Cpf = txtCelular.Text.Trim();
+                client.Cpf = txtCpf.Text.Trim();
                 client.Endereco = txtEndereco.Text.Trim() + ", " + txtNumero.Text.Trim() + ", " + txtBairro.Text.Trim() + ", " + txtCidade.Text.Trim() + ", " + cmbUf.Text.Trim();
                 client.Complemento = txtComplemento.Text.Trim();
                 client.Numero_telefone = txtTelefone.Text.Trim();
@@ -196,7 +196,10 @@ namespace AgendaUI
         {
             SearchBy(cmbFiltro.Text);
         }
-
+        /// <summary>
+        /// Método que preenche a gridView
+        /// </summary>
+        /// <param name="filtro"></param>
         private void SearchBy(string filtro)
         {
             List<Cliente> listCliente = new List<Cliente>();
@@ -235,12 +238,13 @@ namespace AgendaUI
 
         private void dgvClientes_CellMouseMove(object sender, DataGridViewCellMouseEventArgs e)
         {
-            ((DataGridView)sender).SelectedCells[e.ColumnIndex].ToolTipText = ((DataGridView)sender).SelectedCells[e.ColumnIndex].Value.ToString();
+            if (e.ColumnIndex > 0 && e.RowIndex > 0)
+                ((DataGridView)sender).SelectedCells[e.ColumnIndex].ToolTipText = ((DataGridView)sender).SelectedCells[e.ColumnIndex].Value.ToString();
         }
 
         private void btnExcluir_Click(object sender, EventArgs e)
         {
-            if(dgvClientes.RowCount > 0)
+            if (dgvClientes.RowCount > 0)
             {
 
             }
