@@ -57,16 +57,17 @@ namespace FuncoesAuxiliares
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        public static bool  VerificaSeTemNumero(string value)
+        public static bool VerificaSeTemNumero(string value)
         {
             bool capturou = false;
 
-            if (value == null)
+            if (value == null || value == string.Empty)
                 return capturou;
 
-            for (int i = 0; i < value.Length; i++)
-                if (char.IsNumber(value[i]))
-                    capturou = true;
+            else
+                for (int i = 0; i < value.Length; i++)
+                    if (char.IsNumber(value[i]))
+                        capturou = true;
             return capturou;
         }
     }
