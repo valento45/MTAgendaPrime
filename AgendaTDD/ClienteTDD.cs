@@ -12,29 +12,34 @@ namespace AgendaTDD
     [TestFixture]
     public class ClienteTDD
     {
-        string value;
+     //   string value;
         
        //SetUp defina o local onde será executado antes do teste propriamente.
        //Muito útil para organizar dados necessários
        [SetUp]
         public void SetUp()
         {
-             value = "123";            
+            // value = "123";            
         }
 
         [Test]
-        public void VerificaSeTemNumeros()
+        [TestCase("123", true)]
+        [TestCase("absd1cdsdsa", true)]
+        [TestCase("abdasdas", false)]
+        [TestCase("", false)]
+        [TestCase(null, false)]
+        public void VerificaSeTemNumeros(string value, bool esperadoValue)
         {
             bool capturou = false;
+            if (value == null)
+                return;       
+            
             for (int i = 0; i < value.Length; i++)
                 if (char.IsNumber(value[i]))
                     capturou = true;
 
 
-            Assert.IsTrue(capturou);
+            Assert.IsTrue(capturou == esperadoValue);
         }
-
-
-
     }
 }

@@ -60,6 +60,10 @@ namespace FuncoesAuxiliares
         public static bool  VerificaSeTemNumero(string value)
         {
             bool capturou = false;
+
+            if (value == null)
+                return capturou;
+
             for (int i = 0; i < value.Length; i++)
                 if (char.IsNumber(value[i]))
                     capturou = true;
