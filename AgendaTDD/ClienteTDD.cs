@@ -24,7 +24,7 @@ namespace AgendaTDD
 
         [Test]
         [TestCase("123", true)]
-        [TestCase("absd1cdsdsa", true)]
+        [TestCase("absd1cdsdddddddddsa", true)]
         [TestCase("abdasdas", false)]
         [TestCase("", false)]
         [TestCase(null, false)]
