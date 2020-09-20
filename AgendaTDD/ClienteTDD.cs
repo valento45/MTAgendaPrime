@@ -21,7 +21,7 @@ namespace AgendaTDD
         public void SetUp()
         {
             // value = "123";           [
-         
+
         }
 
         [Test]
@@ -29,7 +29,7 @@ namespace AgendaTDD
         [TestCase("absd1cdsdddddddddsa", true)]
         [TestCase("abdasdas", false)]
         [TestCase("", false)]
-        [TestCase(null, false)]
+        [TestCase(null, false)]        
         public void VerificaSeTemNumeros(string value, bool esperadoValue)
         {
             bool capturou = false;
@@ -43,6 +43,60 @@ namespace AgendaTDD
 
             Assert.IsTrue(capturou == esperadoValue);
         }
+
+
+
+        //[Test]
+        //[TestCase("41980759804", true)]
+        //[TestCase("12346578996", false)]
+        //[TestCase("1423", false)]
+        //[TestCase(null, false)]
+        //public void TesteValidaCpf(string cpf, bool resultExpected)
+        //{
+        //    bool resultObtained = false;
+        //    if (cpf == null || cpf.Length < 11)
+        //    {
+        //        return;
+        //    }
+        //    //declaração das variáveis 
+        //    int[] multiplicador1 = new int[9] { 10, 9, 8, 7, 6, 5, 4, 3, 2 };
+        //    int[] multiplicador2 = new int[10] { 11, 10, 9, 8, 7, 6, 5, 4, 3, 2 };
+        //    string tempCpf;
+        //    string digito;
+        //    int soma;
+        //    int resto;
+
+        //    //calculo dos numeros usando variavel multiplicador 1 e 2
+        //    tempCpf = cpf.Substring(0, 9);
+        //    soma = 0;
+        //    for (int i = 0; i < 9; i++)
+        //        soma += int.Parse(tempCpf[i].ToString()) * multiplicador1[i];
+
+        //    resto = soma % 11;
+        //    if (resto < 2)
+        //        resto = 0;
+        //    else
+        //        resto = 11 - resto;
+
+        //    digito = resto.ToString();
+        //    tempCpf = tempCpf + digito;
+
+        //    soma = 0;
+        //    for (int i = 0; i < 10; i++)
+        //        soma += int.Parse(tempCpf[i].ToString()) * multiplicador2[i];
+
+        //    resto = soma % 11;
+        //    if (resto < 2)
+        //        resto = 0;
+        //    else
+        //        resto = 11 - resto;
+
+        //    digito = digito + resto.ToString();
+
+            
+        //    resultObtained = cpf.EndsWith(digito);            
+        //    Assert.IsTrue(resultExpected == resultObtained);
+        //}
 
 
        
