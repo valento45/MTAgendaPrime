@@ -14,7 +14,7 @@ namespace AgendaBE
     {
         #region        VARIAVEIS
 
-       
+
 
         #endregion
 
@@ -30,7 +30,7 @@ namespace AgendaBE
         public string Endereco { get; set; }
         public string Complemento { get; set; }
         public string Numero_celular { get; set; }
-        public string Numero_telefone { get; set; }        
+        public string Numero_telefone { get; set; }
         public string Observacao { get; set; }
         /// <summary>
         /// Retorna um vetor do endereço. Dicionário de posições: 0 Nome da rua, 1 Numero, 2 Bairro, 3 Cidade, 4 UF 
@@ -40,7 +40,7 @@ namespace AgendaBE
             get
             {
                 return Endereco.Split(',');
-            }            
+            }
         }
 
         #endregion
@@ -139,6 +139,17 @@ namespace AgendaBE
             return result;
         }
 
+        public static Cliente GetById(int id)
+        {      
+            NpgsqlCommand cmd = new NpgsqlCommand("SELECT * FROM a_agenda_tb WHERE id = @id;");
+            cmd.Parameters.AddWithValue(@"id", id);
+            DataTable dt = Access.ExecuteReader(cmd).Tables[0];
+
+            if (dt != null && dt.Rows.Count > 0)
+                return new Cliente(dt.Rows[0]);
+            else
+                return new Cliente();
+        }
         public static List<Cliente> GetByCelular(string celular)
         {
             List<Cliente> result = new List<Cliente>();
@@ -180,7 +191,7 @@ namespace AgendaBE
         {
             List<Cliente> result = new List<Cliente>();
 
-            NpgsqlCommand cmd = new NpgsqlCommand("SELECT * FROM a_agenda_tb LIMIT " + limit);          
+            NpgsqlCommand cmd = new NpgsqlCommand("SELECT * FROM a_agenda_tb LIMIT " + limit);
 
             foreach (DataRow cliente in Access.ExecuteReader(cmd).Tables[0].Rows)
                 result.Add(new Cliente(cliente));

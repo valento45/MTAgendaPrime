@@ -66,15 +66,17 @@
             this.btnExcluir = new System.Windows.Forms.Button();
             this.btnEditar = new System.Windows.Forms.Button();
             this.pnlFundo2 = new System.Windows.Forms.Panel();
+            this.lblPesquisaNotFound = new System.Windows.Forms.Label();
             this.dgvClientes = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.filtroNomePnl = new System.Windows.Forms.Panel();
-            this.label13 = new System.Windows.Forms.Label();
-            this.cmbFiltro = new System.Windows.Forms.ComboBox();
-            this.btPesquisar = new System.Windows.Forms.Button();
-            this.txtFiltro = new System.Windows.Forms.TextBox();
             this.filtroMaskPnl = new System.Windows.Forms.Panel();
             this.txtMaskFiltro = new System.Windows.Forms.MaskedTextBox();
+            this.btPesquisar = new System.Windows.Forms.Button();
+            this.cmbFiltro = new System.Windows.Forms.ComboBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.filtroNomePnl = new System.Windows.Forms.Panel();
+            this.txtFiltro = new System.Windows.Forms.TextBox();
+            this.btnNovo = new System.Windows.Forms.Button();
             this.colId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colNome = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colRg = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -83,9 +85,9 @@
             this.colTelefone = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCelular = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colEndereco = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colComplemento = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colObservacoes = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colObj = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.lblPesquisaNotFound = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabCadastrar.SuspendLayout();
             this.pnlFundo1.SuspendLayout();
@@ -96,8 +98,8 @@
             this.pnlFundo2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).BeginInit();
             this.groupBox1.SuspendLayout();
-            this.filtroNomePnl.SuspendLayout();
             this.filtroMaskPnl.SuspendLayout();
+            this.filtroNomePnl.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -115,6 +117,7 @@
             // 
             // tabCadastrar
             // 
+            this.tabCadastrar.Controls.Add(this.btnNovo);
             this.tabCadastrar.Controls.Add(this.btFechar);
             this.tabCadastrar.Controls.Add(this.btHistAlteracoes);
             this.tabCadastrar.Controls.Add(this.btAcao);
@@ -149,6 +152,7 @@
             this.btHistAlteracoes.TabIndex = 2;
             this.btHistAlteracoes.Text = "Hist. Alterações";
             this.btHistAlteracoes.UseVisualStyleBackColor = true;
+            this.btHistAlteracoes.Click += new System.EventHandler(this.btHistAlteracoes_Click);
             // 
             // btAcao
             // 
@@ -499,6 +503,18 @@
             this.pnlFundo2.Size = new System.Drawing.Size(1004, 452);
             this.pnlFundo2.TabIndex = 1;
             // 
+            // lblPesquisaNotFound
+            // 
+            this.lblPesquisaNotFound.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblPesquisaNotFound.AutoSize = true;
+            this.lblPesquisaNotFound.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPesquisaNotFound.Location = new System.Drawing.Point(259, 288);
+            this.lblPesquisaNotFound.Name = "lblPesquisaNotFound";
+            this.lblPesquisaNotFound.Size = new System.Drawing.Size(547, 26);
+            this.lblPesquisaNotFound.TabIndex = 2;
+            this.lblPesquisaNotFound.Text = "Não foram encontrados resultados para a pesquisa informada";
+            this.lblPesquisaNotFound.Visible = false;
+            // 
             // dgvClientes
             // 
             this.dgvClientes.AccessibleDescription = "";
@@ -519,6 +535,7 @@
             this.colTelefone,
             this.colCelular,
             this.colEndereco,
+            this.colComplemento,
             this.colObservacoes,
             this.colObj});
             this.dgvClientes.Location = new System.Drawing.Point(3, 176);
@@ -545,59 +562,6 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Filtrar pesquisa";
             // 
-            // filtroNomePnl
-            // 
-            this.filtroNomePnl.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.filtroNomePnl.Controls.Add(this.txtFiltro);
-            this.filtroNomePnl.Location = new System.Drawing.Point(243, 52);
-            this.filtroNomePnl.Name = "filtroNomePnl";
-            this.filtroNomePnl.Size = new System.Drawing.Size(569, 47);
-            this.filtroNomePnl.TabIndex = 0;
-            // 
-            // label13
-            // 
-            this.label13.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(35, 67);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(29, 13);
-            this.label13.TabIndex = 1;
-            this.label13.Text = "Filtro";
-            // 
-            // cmbFiltro
-            // 
-            this.cmbFiltro.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.cmbFiltro.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbFiltro.FormattingEnabled = true;
-            this.cmbFiltro.Items.AddRange(new object[] {
-            "Nome",
-            "RG",
-            "Telefone",
-            "Celular"});
-            this.cmbFiltro.Location = new System.Drawing.Point(70, 64);
-            this.cmbFiltro.Name = "cmbFiltro";
-            this.cmbFiltro.Size = new System.Drawing.Size(167, 21);
-            this.cmbFiltro.TabIndex = 12;
-            // 
-            // btPesquisar
-            // 
-            this.btPesquisar.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.btPesquisar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btPesquisar.Location = new System.Drawing.Point(831, 62);
-            this.btPesquisar.Name = "btPesquisar";
-            this.btPesquisar.Size = new System.Drawing.Size(110, 23);
-            this.btPesquisar.TabIndex = 13;
-            this.btPesquisar.Text = "Pesquisar";
-            this.btPesquisar.UseVisualStyleBackColor = true;
-            this.btPesquisar.Click += new System.EventHandler(this.btPesquisar_Click);
-            // 
-            // txtFiltro
-            // 
-            this.txtFiltro.Location = new System.Drawing.Point(18, 12);
-            this.txtFiltro.Name = "txtFiltro";
-            this.txtFiltro.Size = new System.Drawing.Size(502, 20);
-            this.txtFiltro.TabIndex = 0;
-            // 
             // filtroMaskPnl
             // 
             this.filtroMaskPnl.Anchor = System.Windows.Forms.AnchorStyles.Left;
@@ -614,6 +578,71 @@
             this.txtMaskFiltro.Name = "txtMaskFiltro";
             this.txtMaskFiltro.Size = new System.Drawing.Size(192, 20);
             this.txtMaskFiltro.TabIndex = 0;
+            // 
+            // btPesquisar
+            // 
+            this.btPesquisar.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.btPesquisar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btPesquisar.Location = new System.Drawing.Point(831, 62);
+            this.btPesquisar.Name = "btPesquisar";
+            this.btPesquisar.Size = new System.Drawing.Size(110, 23);
+            this.btPesquisar.TabIndex = 13;
+            this.btPesquisar.Text = "Pesquisar";
+            this.btPesquisar.UseVisualStyleBackColor = true;
+            this.btPesquisar.Click += new System.EventHandler(this.btPesquisar_Click);
+            // 
+            // cmbFiltro
+            // 
+            this.cmbFiltro.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.cmbFiltro.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbFiltro.FormattingEnabled = true;
+            this.cmbFiltro.Items.AddRange(new object[] {
+            "Nome",
+            "RG",
+            "Telefone",
+            "Celular"});
+            this.cmbFiltro.Location = new System.Drawing.Point(70, 64);
+            this.cmbFiltro.Name = "cmbFiltro";
+            this.cmbFiltro.Size = new System.Drawing.Size(167, 21);
+            this.cmbFiltro.TabIndex = 12;
+            // 
+            // label13
+            // 
+            this.label13.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(35, 67);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(29, 13);
+            this.label13.TabIndex = 1;
+            this.label13.Text = "Filtro";
+            // 
+            // filtroNomePnl
+            // 
+            this.filtroNomePnl.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.filtroNomePnl.Controls.Add(this.txtFiltro);
+            this.filtroNomePnl.Location = new System.Drawing.Point(243, 52);
+            this.filtroNomePnl.Name = "filtroNomePnl";
+            this.filtroNomePnl.Size = new System.Drawing.Size(569, 47);
+            this.filtroNomePnl.TabIndex = 0;
+            // 
+            // txtFiltro
+            // 
+            this.txtFiltro.Location = new System.Drawing.Point(18, 12);
+            this.txtFiltro.Name = "txtFiltro";
+            this.txtFiltro.Size = new System.Drawing.Size(502, 20);
+            this.txtFiltro.TabIndex = 0;
+            // 
+            // btnNovo
+            // 
+            this.btnNovo.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.btnNovo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnNovo.Location = new System.Drawing.Point(178, 459);
+            this.btnNovo.Name = "btnNovo";
+            this.btnNovo.Size = new System.Drawing.Size(110, 23);
+            this.btnNovo.TabIndex = 4;
+            this.btnNovo.Text = "&Novo";
+            this.btnNovo.UseVisualStyleBackColor = true;
+            this.btnNovo.Click += new System.EventHandler(this.btnNovo_Click);
             // 
             // colId
             // 
@@ -663,6 +692,11 @@
             this.colEndereco.Name = "colEndereco";
             this.colEndereco.ReadOnly = true;
             // 
+            // colComplemento
+            // 
+            this.colComplemento.HeaderText = "Complemento";
+            this.colComplemento.Name = "colComplemento";
+            // 
             // colObservacoes
             // 
             this.colObservacoes.HeaderText = "Observações";
@@ -675,18 +709,6 @@
             this.colObj.Name = "colObj";
             this.colObj.ReadOnly = true;
             this.colObj.Visible = false;
-            // 
-            // lblPesquisaNotFound
-            // 
-            this.lblPesquisaNotFound.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lblPesquisaNotFound.AutoSize = true;
-            this.lblPesquisaNotFound.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPesquisaNotFound.Location = new System.Drawing.Point(259, 288);
-            this.lblPesquisaNotFound.Name = "lblPesquisaNotFound";
-            this.lblPesquisaNotFound.Size = new System.Drawing.Size(547, 26);
-            this.lblPesquisaNotFound.TabIndex = 2;
-            this.lblPesquisaNotFound.Text = "Não foram encontrados resultados para a pesquisa informada";
-            this.lblPesquisaNotFound.Visible = false;
             // 
             // frmCliente
             // 
@@ -712,10 +734,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.filtroNomePnl.ResumeLayout(false);
-            this.filtroNomePnl.PerformLayout();
             this.filtroMaskPnl.ResumeLayout(false);
             this.filtroMaskPnl.PerformLayout();
+            this.filtroNomePnl.ResumeLayout(false);
+            this.filtroNomePnl.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -769,6 +791,8 @@
         private System.Windows.Forms.TextBox txtFiltro;
         private System.Windows.Forms.Panel filtroMaskPnl;
         private System.Windows.Forms.MaskedTextBox txtMaskFiltro;
+        private System.Windows.Forms.Label lblPesquisaNotFound;
+        private System.Windows.Forms.Button btnNovo;
         private System.Windows.Forms.DataGridViewTextBoxColumn colId;
         private System.Windows.Forms.DataGridViewTextBoxColumn colNome;
         private System.Windows.Forms.DataGridViewTextBoxColumn colRg;
@@ -777,8 +801,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colTelefone;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCelular;
         private System.Windows.Forms.DataGridViewTextBoxColumn colEndereco;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colComplemento;
         private System.Windows.Forms.DataGridViewTextBoxColumn colObservacoes;
         private System.Windows.Forms.DataGridViewTextBoxColumn colObj;
-        private System.Windows.Forms.Label lblPesquisaNotFound;
     }
 }

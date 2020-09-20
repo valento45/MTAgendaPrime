@@ -12,3 +12,23 @@ tipo_cliente text,
 observacao text,
 constraint u_agenda_tb_pk primary key (id)
 );
+
+
+CREATE TABLE a_log_tb(
+id_log serial not null,
+tipo_movimento int not null,
+data datetime not null,
+id_registro int not null,
+nome_antigo text,
+rg_antigo text,
+cpf_antigo text,
+endereco_antigo text,
+complemento_antigo text,
+numero_celular_antigo text,
+numero_telefone_antigo text,
+tipo_cliente_antigo text,
+observacao_antigo text,
+constraint u_log_tb_pk primary key (id_log),
+constraint u_agenda_tb_fk foreign key(id_registro)
+references a_agenda_tb(id)
+);

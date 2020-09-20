@@ -51,16 +51,42 @@ namespace AgendaUI
                 // senão, Alteração
                 else
                 {
-                    GravaDados(Cliente);
-                    if (Cliente.Update())
-                    {
-                        MessageBox.Show("Dados alterados com sucesso !", "OK", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
+                    if (GravaDados(Cliente))
+                        if (Cliente.Update())
+                        {
+                            MessageBox.Show("Dados alterados com sucesso !", "OK", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            if (dgvClientes.RowCount > 0 && dgvClientes.SelectedRows != null)
+                                AtualizaDadosAlteradosGrid(Cliente);
+                        }
+
                 }
             }
 
         }
 
+        /// <summary>
+        /// Após atualizar / Alterar um registro, esse método atualiza os valores da GridView.
+        /// Este método só pode ser chamado se tiver dados na gridView.
+        /// </summary>
+        /// <param name="cli"></param>
+        private void AtualizaDadosAlteradosGrid(Cliente cli)
+        {
+            dgvClientes.SelectedCells[colNome.Index].Value = cli.Nome;
+            dgvClientes.SelectedCells[colRg.Index].Value = cli.Rg;
+            dgvClientes.SelectedCells[colCpf.Index].Value = cli.Cpf;
+            dgvClientes.SelectedCells[colTipoCliente.Index].Value = cli.Tipo_Cliente;
+            dgvClientes.SelectedCells[colTelefone.Index].Value = cli.Numero_telefone;
+            dgvClientes.SelectedCells[colCelular.Index].Value = cli.Numero_celular;
+            dgvClientes.SelectedCells[colEndereco.Index].Value = cli.Endereco;
+            dgvClientes.SelectedCells[colComplemento.Index].Value = cli.Complemento;
+            dgvClientes.SelectedCells[colObservacoes.Index].Value = cli.Observacao;
+        }
+
+        /// <summary>
+        /// Método que grava os dados preenchidos nos campos do formulário no Objeto
+        /// </summary>
+        /// <param name="client"></param>
+        /// <returns></returns>
         private bool GravaDados(Cliente client)
         {
             bool result = false;
@@ -140,7 +166,7 @@ namespace AgendaUI
             this.Close();
         }
         /// <summary>
-        /// Altera propriedade Text do botão btAcao para Incluir se for inclusão, Alterar se for alteração
+        /// Altera propriedade Text do botão btAcao para 'Incluir' se for inclusão, 'Alterar' se for alteração
         /// </summary>
         private void HabilitaDesabilitaAlteracao()
         {
@@ -156,16 +182,23 @@ namespace AgendaUI
             //dgvClientes.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             if (dgvClientes.RowCount > 0)
             {
-                Cliente = dgvClientes.SelectedCells[colObj.Index].Value as Cliente ?? null;
+                int codigo;
+                int.TryParse(dgvClientes.SelectedCells[colId.Index].Value.ToString(), out codigo);
 
-                isAlteracao = true;
+                if (codigo > 0)
+                {
+                    Cliente = Cliente.GetById(codigo);
+                    //Transcreve os dados do cliente nos campos da aba 'Dados Cliente'
+                    GravaDadosNosControles(Cliente);
+                    isAlteracao = true;
+                }
+                else
+                    isAlteracao = false;
+
                 HabilitaDesabilitaAlteracao();
 
-                //Transcreve os dados do cliente nos campos da aba 'Dados Cliente'
-                GravaDadosNoControle(Cliente);
-
                 //Alterando a tab selecionada
-                if (tabControl1.SelectedTab == tabConsultar)
+                if (isAlteracao && tabControl1.SelectedTab == tabConsultar)
                     tabControl1.SelectedTab = tabCadastrar;
             }
         }
@@ -173,18 +206,18 @@ namespace AgendaUI
         /// Transcreve os dados do cliente nos campos da aba 'Dados Cliente'
         /// </summary>
         /// <param name="cliente"></param>
-        private void GravaDadosNoControle(Cliente cliente)
+        private void GravaDadosNosControles(Cliente cliente)
         {
             if (cliente != null)
             {
                 txtNome.Text = cliente.Nome;
                 txtRg.Text = cliente.Rg;
                 txtCpf.Text = cliente.Cpf;
-                txtEndereco.Text = cliente.EnderecoArray[0];
-                txtNumero.Text = cliente.EnderecoArray[1];
-                txtBairro.Text = cliente.EnderecoArray[2];
-                txtCidade.Text = cliente.EnderecoArray[3];
-                cmbUf.SelectedText = cliente.EnderecoArray[4];
+                txtEndereco.Text = cliente.EnderecoArray[0].Trim();
+                txtNumero.Text = cliente.EnderecoArray[1].Trim();
+                txtBairro.Text = cliente.EnderecoArray[2].Trim();
+                txtCidade.Text = cliente.EnderecoArray[3].Trim();
+                cmbUf.SelectedText = cliente.EnderecoArray[4].Trim().ToString();
                 txtComplemento.Text = cliente.Complemento;
                 txtTelefone.Text = cliente.Numero_telefone;
                 txtCelular.Text = cliente.Numero_celular;
@@ -224,8 +257,8 @@ namespace AgendaUI
 
             if (listCliente.Count > 0)
             {
-                dgvClientes.Rows.Clear();
                 lblPesquisaNotFound.Visible = false;
+                dgvClientes.Rows.Clear();
                 foreach (var x in listCliente)
                     dgvClientes.Rows.Add(x.Id, x.Nome, x.Rg, x.Cpf, x.Tipo_Cliente, x.Numero_telefone, x.Numero_celular, x.Endereco, x.Complemento, x.Observacao, x);
             }
@@ -246,8 +279,58 @@ namespace AgendaUI
         {
             if (dgvClientes.RowCount > 0)
             {
-
+                int cod;
+                int.TryParse(dgvClientes.SelectedCells[colId.Index].Value.ToString(), out cod);
+                if (cod > 0)
+                {
+                    if (MessageBox.Show("Deseja realmente excluir o cliente selecionado ?", "Atenção", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    {
+                        if (Cliente.Delete(cod))
+                        {
+                            dgvClientes.Rows.RemoveAt(dgvClientes.SelectedRows[0].Index);
+                            MessageBox.Show("O cliente selecionado foi excluído.", "OK", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                        else
+                            MessageBox.Show("O registro pode não ter sido excluído! \r\nPor favor, verifique os dados.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                }
+                else
+                    MessageBox.Show("Ocorreu um problema ao selecionar o registro !", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+        }
+
+
+        private void NovoRegistro()
+        {
+            Cliente = null;
+            isAlteracao = false;
+            HabilitaDesabilitaAlteracao();
+
+            txtNome.Clear();
+            txtRg.Clear();
+            txtCpf.Clear();
+            txtEndereco.Clear();
+            txtBairro.Clear();
+            txtNumero.Clear();
+            txtCidade.Clear();
+            cmbUf.SelectedIndex = -1;
+            txtComplemento.Clear();
+            txtObservacoes.Clear();
+            txtTelefone.Clear();
+            txtCelular.Clear();
+            cmbTipoCliente.SelectedIndex = -1;
+
+            MessageBox.Show("Dados resetados!", "Novo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void btnNovo_Click(object sender, EventArgs e)
+        {
+            NovoRegistro();
+        }
+
+        private void btHistAlteracoes_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

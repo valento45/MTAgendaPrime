@@ -12,6 +12,7 @@ namespace AgendaTDD
     [TestFixture]
     public class ClienteTDD
     {
+
         //   string value;
 
         //SetUp defina o local onde será executado antes do teste propriamente.
@@ -19,7 +20,8 @@ namespace AgendaTDD
         [SetUp]
         public void SetUp()
         {
-            // value = "123";            
+            // value = "123";           [
+         
         }
 
         [Test]
@@ -41,5 +43,8 @@ namespace AgendaTDD
 
             Assert.IsTrue(capturou == esperadoValue);
         }
+
+
+       
     }
 }
