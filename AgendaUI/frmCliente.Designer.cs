@@ -30,6 +30,7 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabCadastrar = new System.Windows.Forms.TabPage();
+            this.btnNovo = new System.Windows.Forms.Button();
             this.btFechar = new System.Windows.Forms.Button();
             this.btHistAlteracoes = new System.Windows.Forms.Button();
             this.btAcao = new System.Windows.Forms.Button();
@@ -68,15 +69,6 @@
             this.pnlFundo2 = new System.Windows.Forms.Panel();
             this.lblPesquisaNotFound = new System.Windows.Forms.Label();
             this.dgvClientes = new System.Windows.Forms.DataGridView();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.filtroMaskPnl = new System.Windows.Forms.Panel();
-            this.txtMaskFiltro = new System.Windows.Forms.MaskedTextBox();
-            this.btPesquisar = new System.Windows.Forms.Button();
-            this.cmbFiltro = new System.Windows.Forms.ComboBox();
-            this.label13 = new System.Windows.Forms.Label();
-            this.filtroNomePnl = new System.Windows.Forms.Panel();
-            this.txtFiltro = new System.Windows.Forms.TextBox();
-            this.btnNovo = new System.Windows.Forms.Button();
             this.colId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colNome = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colRg = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -88,6 +80,14 @@
             this.colComplemento = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colObservacoes = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colObj = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.filtroMaskPnl = new System.Windows.Forms.Panel();
+            this.txtMaskFiltro = new System.Windows.Forms.MaskedTextBox();
+            this.btPesquisar = new System.Windows.Forms.Button();
+            this.cmbFiltro = new System.Windows.Forms.ComboBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.filtroNomePnl = new System.Windows.Forms.Panel();
+            this.txtFiltro = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tabCadastrar.SuspendLayout();
             this.pnlFundo1.SuspendLayout();
@@ -129,6 +129,18 @@
             this.tabCadastrar.TabIndex = 0;
             this.tabCadastrar.Text = "Dados Cliente";
             this.tabCadastrar.UseVisualStyleBackColor = true;
+            // 
+            // btnNovo
+            // 
+            this.btnNovo.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.btnNovo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnNovo.Location = new System.Drawing.Point(178, 459);
+            this.btnNovo.Name = "btnNovo";
+            this.btnNovo.Size = new System.Drawing.Size(110, 23);
+            this.btnNovo.TabIndex = 4;
+            this.btnNovo.Text = "&Novo";
+            this.btnNovo.UseVisualStyleBackColor = true;
+            this.btnNovo.Click += new System.EventHandler(this.btnNovo_Click);
             // 
             // btFechar
             // 
@@ -546,104 +558,6 @@
             this.dgvClientes.TabIndex = 1;
             this.dgvClientes.CellMouseMove += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvClientes_CellMouseMove);
             // 
-            // groupBox1
-            // 
-            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox1.Controls.Add(this.filtroMaskPnl);
-            this.groupBox1.Controls.Add(this.btPesquisar);
-            this.groupBox1.Controls.Add(this.cmbFiltro);
-            this.groupBox1.Controls.Add(this.label13);
-            this.groupBox1.Controls.Add(this.filtroNomePnl);
-            this.groupBox1.Location = new System.Drawing.Point(3, 3);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(996, 167);
-            this.groupBox1.TabIndex = 0;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Filtrar pesquisa";
-            // 
-            // filtroMaskPnl
-            // 
-            this.filtroMaskPnl.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.filtroMaskPnl.Controls.Add(this.txtMaskFiltro);
-            this.filtroMaskPnl.Location = new System.Drawing.Point(240, 52);
-            this.filtroMaskPnl.Name = "filtroMaskPnl";
-            this.filtroMaskPnl.Size = new System.Drawing.Size(569, 47);
-            this.filtroMaskPnl.TabIndex = 14;
-            this.filtroMaskPnl.Visible = false;
-            // 
-            // txtMaskFiltro
-            // 
-            this.txtMaskFiltro.Location = new System.Drawing.Point(21, 12);
-            this.txtMaskFiltro.Name = "txtMaskFiltro";
-            this.txtMaskFiltro.Size = new System.Drawing.Size(192, 20);
-            this.txtMaskFiltro.TabIndex = 0;
-            // 
-            // btPesquisar
-            // 
-            this.btPesquisar.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.btPesquisar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btPesquisar.Location = new System.Drawing.Point(831, 62);
-            this.btPesquisar.Name = "btPesquisar";
-            this.btPesquisar.Size = new System.Drawing.Size(110, 23);
-            this.btPesquisar.TabIndex = 13;
-            this.btPesquisar.Text = "Pesquisar";
-            this.btPesquisar.UseVisualStyleBackColor = true;
-            this.btPesquisar.Click += new System.EventHandler(this.btPesquisar_Click);
-            // 
-            // cmbFiltro
-            // 
-            this.cmbFiltro.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.cmbFiltro.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbFiltro.FormattingEnabled = true;
-            this.cmbFiltro.Items.AddRange(new object[] {
-            "Nome",
-            "RG",
-            "Telefone",
-            "Celular"});
-            this.cmbFiltro.Location = new System.Drawing.Point(70, 64);
-            this.cmbFiltro.Name = "cmbFiltro";
-            this.cmbFiltro.Size = new System.Drawing.Size(167, 21);
-            this.cmbFiltro.TabIndex = 12;
-            // 
-            // label13
-            // 
-            this.label13.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(35, 67);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(29, 13);
-            this.label13.TabIndex = 1;
-            this.label13.Text = "Filtro";
-            // 
-            // filtroNomePnl
-            // 
-            this.filtroNomePnl.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.filtroNomePnl.Controls.Add(this.txtFiltro);
-            this.filtroNomePnl.Location = new System.Drawing.Point(243, 52);
-            this.filtroNomePnl.Name = "filtroNomePnl";
-            this.filtroNomePnl.Size = new System.Drawing.Size(569, 47);
-            this.filtroNomePnl.TabIndex = 0;
-            // 
-            // txtFiltro
-            // 
-            this.txtFiltro.Location = new System.Drawing.Point(18, 12);
-            this.txtFiltro.Name = "txtFiltro";
-            this.txtFiltro.Size = new System.Drawing.Size(502, 20);
-            this.txtFiltro.TabIndex = 0;
-            // 
-            // btnNovo
-            // 
-            this.btnNovo.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.btnNovo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnNovo.Location = new System.Drawing.Point(178, 459);
-            this.btnNovo.Name = "btnNovo";
-            this.btnNovo.Size = new System.Drawing.Size(110, 23);
-            this.btnNovo.TabIndex = 4;
-            this.btnNovo.Text = "&Novo";
-            this.btnNovo.UseVisualStyleBackColor = true;
-            this.btnNovo.Click += new System.EventHandler(this.btnNovo_Click);
-            // 
             // colId
             // 
             this.colId.HeaderText = "ID";
@@ -709,6 +623,93 @@
             this.colObj.Name = "colObj";
             this.colObj.ReadOnly = true;
             this.colObj.Visible = false;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.filtroMaskPnl);
+            this.groupBox1.Controls.Add(this.btPesquisar);
+            this.groupBox1.Controls.Add(this.cmbFiltro);
+            this.groupBox1.Controls.Add(this.label13);
+            this.groupBox1.Controls.Add(this.filtroNomePnl);
+            this.groupBox1.Location = new System.Drawing.Point(3, 3);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(996, 167);
+            this.groupBox1.TabIndex = 0;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Filtrar pesquisa";
+            // 
+            // filtroMaskPnl
+            // 
+            this.filtroMaskPnl.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.filtroMaskPnl.Controls.Add(this.txtMaskFiltro);
+            this.filtroMaskPnl.Location = new System.Drawing.Point(240, 52);
+            this.filtroMaskPnl.Name = "filtroMaskPnl";
+            this.filtroMaskPnl.Size = new System.Drawing.Size(569, 47);
+            this.filtroMaskPnl.TabIndex = 14;
+            this.filtroMaskPnl.Visible = false;
+            // 
+            // txtMaskFiltro
+            // 
+            this.txtMaskFiltro.Location = new System.Drawing.Point(21, 12);
+            this.txtMaskFiltro.Name = "txtMaskFiltro";
+            this.txtMaskFiltro.Size = new System.Drawing.Size(192, 20);
+            this.txtMaskFiltro.TabIndex = 0;
+            // 
+            // btPesquisar
+            // 
+            this.btPesquisar.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.btPesquisar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btPesquisar.Location = new System.Drawing.Point(831, 62);
+            this.btPesquisar.Name = "btPesquisar";
+            this.btPesquisar.Size = new System.Drawing.Size(110, 23);
+            this.btPesquisar.TabIndex = 13;
+            this.btPesquisar.Text = "Pesquisar";
+            this.btPesquisar.UseVisualStyleBackColor = true;
+            this.btPesquisar.Click += new System.EventHandler(this.btPesquisar_Click);
+            // 
+            // cmbFiltro
+            // 
+            this.cmbFiltro.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.cmbFiltro.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbFiltro.FormattingEnabled = true;
+            this.cmbFiltro.Items.AddRange(new object[] {
+            "Nome",
+            "RG",
+            "Telefone",
+            "Celular"});
+            this.cmbFiltro.Location = new System.Drawing.Point(70, 64);
+            this.cmbFiltro.Name = "cmbFiltro";
+            this.cmbFiltro.Size = new System.Drawing.Size(167, 21);
+            this.cmbFiltro.TabIndex = 12;
+            this.cmbFiltro.SelectedIndexChanged += new System.EventHandler(this.cmbFiltro_SelectedIndexChanged);
+            // 
+            // label13
+            // 
+            this.label13.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(35, 67);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(29, 13);
+            this.label13.TabIndex = 1;
+            this.label13.Text = "Filtro";
+            // 
+            // filtroNomePnl
+            // 
+            this.filtroNomePnl.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.filtroNomePnl.Controls.Add(this.txtFiltro);
+            this.filtroNomePnl.Location = new System.Drawing.Point(243, 52);
+            this.filtroNomePnl.Name = "filtroNomePnl";
+            this.filtroNomePnl.Size = new System.Drawing.Size(569, 47);
+            this.filtroNomePnl.TabIndex = 0;
+            // 
+            // txtFiltro
+            // 
+            this.txtFiltro.Location = new System.Drawing.Point(18, 12);
+            this.txtFiltro.Name = "txtFiltro";
+            this.txtFiltro.Size = new System.Drawing.Size(502, 20);
+            this.txtFiltro.TabIndex = 0;
             // 
             // frmCliente
             // 

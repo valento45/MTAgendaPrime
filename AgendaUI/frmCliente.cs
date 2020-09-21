@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using AgendaBE;
+using FuncoesAuxiliares;
 namespace AgendaUI
 {
     public partial class frmCliente : Form
@@ -227,6 +228,16 @@ namespace AgendaUI
 
         private void btPesquisar_Click(object sender, EventArgs e)
         {
+            string value = "abcdefghijklmnoprstuvwxyz123456";
+            string expectedValue = "123456";
+
+            value.SomenteNumeros();
+
+            if(value == expectedValue)
+            {
+
+            }
+
             SearchBy(cmbFiltro.Text);
         }
         /// <summary>
@@ -288,7 +299,8 @@ namespace AgendaUI
                         if (Cliente.Delete(cod))
                         {
                             dgvClientes.Rows.RemoveAt(dgvClientes.SelectedRows[0].Index);
-                            MessageBox.Show("O cliente selecionado foi excluído.", "OK", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                           // MessageBox.Show("O cliente selecionado foi excluído.", "OK", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                           //Insert log
                         }
                         else
                             MessageBox.Show("O registro pode não ter sido excluído! \r\nPor favor, verifique os dados.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -331,6 +343,21 @@ namespace AgendaUI
         private void btHistAlteracoes_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void cmbFiltro_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string filtro = cmbFiltro.Text;
+            if(filtro == "Nome")
+            {
+                filtroNomePnl.Visible = true;
+                filtroMaskPnl.Visible = false;
+            }
+            else
+            {
+                filtroNomePnl.Visible = false;
+                filtroMaskPnl.Visible = true;
+            }
         }
     }
 }

@@ -140,7 +140,7 @@ namespace AgendaBE
         }
 
         public static Cliente GetById(int id)
-        {      
+        {
             NpgsqlCommand cmd = new NpgsqlCommand("SELECT * FROM a_agenda_tb WHERE id = @id;");
             cmd.Parameters.AddWithValue(@"id", id);
             DataTable dt = Access.ExecuteReader(cmd).Tables[0];
@@ -198,4 +198,6 @@ namespace AgendaBE
             return result;
         }
     }
+
+   
 }

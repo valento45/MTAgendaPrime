@@ -10,7 +10,15 @@ namespace FuncoesAuxiliares
     {
         public static void SomenteNumeros(this string value)
         {
-            value = value.Replace("-", "").Replace(".", "").Replace(",", "");
+            for(int i = 0; i < value.Length; i++)
+            {
+                if (!(Char.IsNumber(value[i])))
+                    value = value.Replace(value[i].ToString(), " ");
+            }
+            value = value.Replace(" ", "").Trim();
         }
+
+
+        
     }
 }

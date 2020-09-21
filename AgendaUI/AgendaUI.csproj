@@ -86,6 +86,10 @@
       <Project>{d93ebbc3-0f26-428b-a281-8a9355619a88}</Project>
       <Name>AgendaBE</Name>
     </ProjectReference>
+    <ProjectReference Include="..\FuncoesAuxiliares\FuncoesAuxiliares.csproj">
+      <Project>{eaceb162-8504-4d63-953e-6bb257467bb7}</Project>
+      <Name>FuncoesAuxiliares</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

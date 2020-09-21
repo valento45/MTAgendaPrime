@@ -44,6 +44,22 @@ namespace AgendaTDD
             Assert.IsTrue(capturou == esperadoValue);
         }
 
+        [Test]
+        [TestCase("abcdefghijklmnoprstuvwxyz123456", "123456")]
+        [TestCase("#3!###################################################!tuvwxyz123456", "3123456")]
+        [TestCase("#1#######!tuvwxyz123456", "1123456")]
+        [TestCase("#1## ,.xz###  ,.;/'##!t         uvwxyz123456", "1123456")]
+        public void SomenteNumeros(string value, string expectedValue)
+        {
+            for(int i = 0; i < value.Length; i++)
+            {
+                if (!(Char.IsNumber(value[i])))                
+                    value = value.Replace(value[i].ToString(), " ");
+                               
+            }
+            value = value.Replace(" ", "").Trim();
+            Assert.IsTrue(value == expectedValue);
+        }
 
 
         //[Test]
