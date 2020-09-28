@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -67,8 +68,44 @@ namespace FuncoesAuxiliares
             else
                 for (int i = 0; i < value.Length; i++)
                     if (char.IsNumber(value[i]))
+                    {
                         capturou = true;
+                        break;
+                    }
             return capturou;
         }
+        public static T GetValueFromDescription<T>(string description)
+        {
+            var type = typeof(T);
+            if (!type.IsEnum) throw new InvalidOperationException();
+            foreach (var field in type.GetFields())
+            {
+                var attribute = Attribute.GetCustomAttribute(field,
+                    typeof(DescriptionAttribute)) as DescriptionAttribute;
+                if (attribute != null)
+                {
+                    if (attribute.Description.ToUpper() == description.ToUpper())
+                        return (T)field.GetValue(null);
+                }
+                else
+                {
+                    if (field.Name.ToUpper() == description.ToUpper())
+                        return (T)field.GetValue(null);
+                }
+            }
+            throw new ArgumentException("Not found.", "description");
+            // or return default(T);
+        }
+    }
+    public enum MaskFilters : int
+    {
+        [Description("000.000.000-00")]
+        CPF = 0,
+        [Description("00.000.000-0")]
+        RG = 1,
+        [Description("(00)00000-0000")]
+        Celular = 2,
+        [Description("(00)0000-0000")]
+        Telefone = 3,
     }
 }

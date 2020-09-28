@@ -227,17 +227,7 @@ namespace AgendaUI
         }
 
         private void btPesquisar_Click(object sender, EventArgs e)
-        {
-            string value = "abcdefghijklmnoprstuvwxyz123456";
-            string expectedValue = "123456";
-
-            value.SomenteNumeros();
-
-            if(value == expectedValue)
-            {
-
-            }
-
+        {        
             SearchBy(cmbFiltro.Text);
         }
         /// <summary>
@@ -356,8 +346,14 @@ namespace AgendaUI
             else
             {
                 filtroNomePnl.Visible = false;
-                filtroMaskPnl.Visible = true;
+                filtroMaskPnl.Visible = true;                
+                DefineMascaraFiltro(cmbFiltro.Text);
             }
+        }
+
+        private void DefineMascaraFiltro(string mask)
+        {            
+            txtMaskFiltro.Mask = Enum.Parse(typeof(MaskFilters), mask).ToString(); 
         }
     }
 }

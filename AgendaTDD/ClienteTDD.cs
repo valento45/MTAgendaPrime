@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Bogus;
 using NUnit;
 using NUnit.Framework;
+using System.Windows.Forms;
 
 namespace AgendaTDD
 {
@@ -39,7 +40,10 @@ namespace AgendaTDD
             else
                 for (int i = 0; i < value.Length; i++)
                     if (char.IsNumber(value[i]))
+                    {
                         capturou = true;
+                        break;
+                    }
 
             Assert.IsTrue(capturou == esperadoValue);
         }
@@ -51,16 +55,28 @@ namespace AgendaTDD
         [TestCase("#1## ,.xz###  ,.;/'##!t         uvwxyz123456", "1123456")]
         public void SomenteNumeros(string value, string expectedValue)
         {
-            for(int i = 0; i < value.Length; i++)
+            string result = "";
+            try
             {
-                if (!(Char.IsNumber(value[i])))                
-                    value = value.Replace(value[i].ToString(), " ");
-                               
+                foreach (char c in value)
+                    if (char.IsNumber(c))
+                        result += c;
             }
-            value = value.Replace(" ", "").Trim();
-            Assert.IsTrue(value == expectedValue);
+            catch { }
+            
+            Assert.IsTrue(result == expectedValue);
         }
 
+
+        [Test]
+        [TestCase("000,000,000-00")]
+        public void DefineMaskTextBox(string mask)
+        {
+            MaskedTextBox txtMask = new MaskedTextBox();
+            txtMask.Mask = mask;
+
+            Assert.IsTrue(txtMask.Mask == mask);
+        }
 
         //[Test]
         //[TestCase("41980759804", true)]

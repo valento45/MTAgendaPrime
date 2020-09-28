@@ -8,14 +8,21 @@ namespace FuncoesAuxiliares
 {
     public static class ExtensionMethods
     {
-        public static void SomenteNumeros(this string value)
+        public static string SomenteNumeros(this string value)
         {
-            for(int i = 0; i < value.Length; i++)
+            if (value == null || value == "")
+                return value;
+
+            string result = "";
+            try
             {
-                if (!(Char.IsNumber(value[i])))
-                    value = value.Replace(value[i].ToString(), " ");
+                foreach (char c in value)
+                    if (char.IsNumber(c))
+                        result += c;
             }
-            value = value.Replace(" ", "").Trim();
+            catch { }
+            return result;
+
         }
 
 
