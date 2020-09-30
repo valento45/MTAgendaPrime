@@ -282,7 +282,7 @@ namespace AgendaUI
             if (e.ColumnIndex > 0 && e.RowIndex > 0)
                 ((DataGridView)sender).SelectedCells[e.ColumnIndex].ToolTipText = ((DataGridView)sender).SelectedCells[e.ColumnIndex].Value.ToString();
         }
-
+        //Thais BB
         private void btnExcluir_Click(object sender, EventArgs e)
         {
             if (dgvClientes.RowCount > 0)
