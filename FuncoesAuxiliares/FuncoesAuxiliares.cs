@@ -95,13 +95,13 @@ namespace FuncoesAuxiliares
             }
             throw new ArgumentException("Not found.", "description");
             // or return default(T);
-        }
+        }       
     }
     public enum MaskFilters : int
     {
-        [Description("000.000.000-00")]
+        [Description("000,000,000-00")]
         CPF = 0,
-        [Description("00.000.000-0")]
+        [Description("00,000,000-0")]
         RG = 1,
         [Description("(00)00000-0000")]
         Celular = 2,

@@ -88,6 +88,7 @@
             this.label13 = new System.Windows.Forms.Label();
             this.filtroNomePnl = new System.Windows.Forms.Panel();
             this.txtFiltro = new System.Windows.Forms.TextBox();
+            this.btnHistA = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabCadastrar.SuspendLayout();
             this.pnlFundo1.SuspendLayout();
@@ -157,6 +158,7 @@
             // btHistAlteracoes
             // 
             this.btHistAlteracoes.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.btHistAlteracoes.Enabled = false;
             this.btHistAlteracoes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btHistAlteracoes.Location = new System.Drawing.Point(446, 459);
             this.btHistAlteracoes.Name = "btHistAlteracoes";
@@ -164,6 +166,7 @@
             this.btHistAlteracoes.TabIndex = 2;
             this.btHistAlteracoes.Text = "Hist. Alterações";
             this.btHistAlteracoes.UseVisualStyleBackColor = true;
+            this.btHistAlteracoes.Visible = false;
             this.btHistAlteracoes.Click += new System.EventHandler(this.btHistAlteracoes_Click);
             // 
             // btAcao
@@ -466,6 +469,7 @@
             // 
             // tabConsultar
             // 
+            this.tabConsultar.Controls.Add(this.btnHistA);
             this.tabConsultar.Controls.Add(this.btnExcluir);
             this.tabConsultar.Controls.Add(this.btnEditar);
             this.tabConsultar.Controls.Add(this.pnlFundo2);
@@ -711,6 +715,19 @@
             this.txtFiltro.Size = new System.Drawing.Size(502, 20);
             this.txtFiltro.TabIndex = 0;
             // 
+            // btnHistA
+            // 
+            this.btnHistA.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.btnHistA.Enabled = false;
+            this.btnHistA.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnHistA.Location = new System.Drawing.Point(292, 464);
+            this.btnHistA.Name = "btnHistA";
+            this.btnHistA.Size = new System.Drawing.Size(110, 23);
+            this.btnHistA.TabIndex = 6;
+            this.btnHistA.Text = "Hist. Alterações";
+            this.btnHistA.UseVisualStyleBackColor = true;
+            this.btnHistA.Click += new System.EventHandler(this.btnHistA_Click);
+            // 
             // frmCliente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -805,5 +822,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colComplemento;
         private System.Windows.Forms.DataGridViewTextBoxColumn colObservacoes;
         private System.Windows.Forms.DataGridViewTextBoxColumn colObj;
+        private System.Windows.Forms.Button btnHistA;
     }
 }

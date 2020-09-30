@@ -64,7 +64,8 @@ namespace AgendaTDD
             }
             catch { }
             
-            Assert.IsTrue(result == expectedValue);
+           // Assert.IsTrue(result == expectedValue);
+            Assert.That(result, Is.EqualTo(expectedValue));
         }
 
 

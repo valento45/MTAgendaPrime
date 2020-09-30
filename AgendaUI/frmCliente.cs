@@ -43,18 +43,21 @@ namespace AgendaUI
                     GravaDados(cliente);
                     if (cliente.Insert())
                     {
+                        LogCliente.Insert(TipoMovimento.Inclusao, DateTime.Now, cliente);
                         MessageBox.Show("Dados inseridos com sucesso !", "OK", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        isAlteracao = true;
                         Cliente = cliente;
+                        isAlteracao = true;
                         HabilitaDesabilitaAlteracao();
                     }
                 }
                 // senão, Alteração
                 else
                 {
+                    Cliente client_log = Cliente;
                     if (GravaDados(Cliente))
                         if (Cliente.Update())
                         {
+                            LogCliente.Insert(TipoMovimento.Alteracao, DateTime.Now, client_log);
                             MessageBox.Show("Dados alterados com sucesso !", "OK", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             if (dgvClientes.RowCount > 0 && dgvClientes.SelectedRows != null)
                                 AtualizaDadosAlteradosGrid(Cliente);
@@ -95,7 +98,9 @@ namespace AgendaUI
             try
             {
                 if (client == null)
-                { if (isAlteracao) throw new Exception("Impossível alterar um registro que não foi selecionado!"); else client = new Cliente(); }
+                {
+                    if (isAlteracao) throw new ArgumentException("Impossível alterar um registro que não foi selecionado!"); else client = new Cliente();
+                }
 
                 client.Nome = txtNome.Text.Trim();
                 client.Rg = txtRg.Text.Trim();
@@ -110,8 +115,8 @@ namespace AgendaUI
             }
             catch (Exception ex)
             {
-                MessageBox.Show("\r\n" + ex.Message, "Erro ao gravar os dados", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 result = false;
+                MessageBox.Show("\r\n" + ex.Message, "Erro ao gravar os dados", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             return result;
         }
@@ -189,22 +194,22 @@ namespace AgendaUI
                 if (codigo > 0)
                 {
                     Cliente = Cliente.GetById(codigo);
+                    isAlteracao = true;
                     //Transcreve os dados do cliente nos campos da aba 'Dados Cliente'
                     GravaDadosNosControles(Cliente);
-                    isAlteracao = true;
+
+                    //Alterando a tab selecionada
+                    if (isAlteracao && tabControl1.SelectedTab == tabConsultar)
+                        tabControl1.SelectedTab = tabCadastrar;
                 }
                 else
                     isAlteracao = false;
 
                 HabilitaDesabilitaAlteracao();
-
-                //Alterando a tab selecionada
-                if (isAlteracao && tabControl1.SelectedTab == tabConsultar)
-                    tabControl1.SelectedTab = tabCadastrar;
             }
         }
         /// <summary>
-        /// Transcreve os dados do cliente nos campos da aba 'Dados Cliente'
+        /// Transcreve os dados do cliente nos campos do formulário na aba 'Dados Cliente'
         /// </summary>
         /// <param name="cliente"></param>
         private void GravaDadosNosControles(Cliente cliente)
@@ -218,7 +223,7 @@ namespace AgendaUI
                 txtNumero.Text = cliente.EnderecoArray[1].Trim();
                 txtBairro.Text = cliente.EnderecoArray[2].Trim();
                 txtCidade.Text = cliente.EnderecoArray[3].Trim();
-                cmbUf.SelectedText = cliente.EnderecoArray[4].Trim().ToString();
+                cmbUf.Text = cliente.EnderecoArray[4].Trim();
                 txtComplemento.Text = cliente.Complemento;
                 txtTelefone.Text = cliente.Numero_telefone;
                 txtCelular.Text = cliente.Numero_celular;
@@ -227,7 +232,7 @@ namespace AgendaUI
         }
 
         private void btPesquisar_Click(object sender, EventArgs e)
-        {        
+        {
             SearchBy(cmbFiltro.Text);
         }
         /// <summary>
@@ -262,11 +267,13 @@ namespace AgendaUI
                 dgvClientes.Rows.Clear();
                 foreach (var x in listCliente)
                     dgvClientes.Rows.Add(x.Id, x.Nome, x.Rg, x.Cpf, x.Tipo_Cliente, x.Numero_telefone, x.Numero_celular, x.Endereco, x.Complemento, x.Observacao, x);
+                btnHistA.Enabled = dgvClientes.RowCount > 0;
             }
             else
             {
                 dgvClientes.Rows.Clear();
                 lblPesquisaNotFound.Visible = true;
+                btnHistA.Enabled = dgvClientes.RowCount > 0;
             }
         }
 
@@ -286,18 +293,21 @@ namespace AgendaUI
                 {
                     if (MessageBox.Show("Deseja realmente excluir o cliente selecionado ?", "Atenção", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     {
+                        Cliente = Cliente.GetById(cod);
                         if (Cliente.Delete(cod))
                         {
+                            LogCliente.Insert(TipoMovimento.Exclusao, DateTime.Now, Cliente);
+                            Cliente = null;
                             dgvClientes.Rows.RemoveAt(dgvClientes.SelectedRows[0].Index);
-                           // MessageBox.Show("O cliente selecionado foi excluído.", "OK", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                           //Insert log
+                            // MessageBox.Show("O cliente selecionado foi excluído.", "OK", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            //Insert log
                         }
                         else
                             MessageBox.Show("O registro pode não ter sido excluído! \r\nPor favor, verifique os dados.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                 }
                 else
-                    MessageBox.Show("Ocorreu um problema ao selecionar o registro !", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Ocorreu um problema ao excluir o registro !", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -338,7 +348,7 @@ namespace AgendaUI
         private void cmbFiltro_SelectedIndexChanged(object sender, EventArgs e)
         {
             string filtro = cmbFiltro.Text;
-            if(filtro == "Nome")
+            if (filtro == "Nome")
             {
                 filtroNomePnl.Visible = true;
                 filtroMaskPnl.Visible = false;
@@ -346,14 +356,28 @@ namespace AgendaUI
             else
             {
                 filtroNomePnl.Visible = false;
-                filtroMaskPnl.Visible = true;                
+                filtroMaskPnl.Visible = true;
                 DefineMascaraFiltro(cmbFiltro.Text);
             }
         }
 
         private void DefineMascaraFiltro(string mask)
-        {            
-            txtMaskFiltro.Mask = Enum.Parse(typeof(MaskFilters), mask).ToString(); 
+        {
+            MaskFilters filter = (MaskFilters)Enum.Parse(typeof(MaskFilters), mask);
+            txtMaskFiltro.Mask = filter.GetAtributoDoTipoEnum<DescriptionAttribute>().Description;
+        }
+
+        private void btnHistA_Click(object sender, EventArgs e)
+        {
+            //tenta converter id do registro na gridView
+            int id;
+            int.TryParse(dgvClientes.SelectedCells[colId.Index].Value.ToString(), out id);
+
+            if (id > 0)
+            {
+                frmHistoricoA frm = new frmHistoricoA(id);
+                frm.ShowDialog();
+            }
         }
     }
 }

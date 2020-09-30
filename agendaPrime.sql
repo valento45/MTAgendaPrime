@@ -14,10 +14,10 @@ constraint u_agenda_tb_pk primary key (id)
 );
 
 
-CREATE TABLE a_log_tb(
+CREATE TABLE a_historico_tb(
 id_log serial not null,
 tipo_movimento int not null,
-data datetime not null,
+data_log timestamp with time zone,
 id_registro int not null,
 nome_antigo text,
 rg_antigo text,
@@ -32,3 +32,4 @@ constraint u_log_tb_pk primary key (id_log),
 constraint u_agenda_tb_fk foreign key(id_registro)
 references a_agenda_tb(id)
 );
+
