@@ -13,6 +13,14 @@ namespace AgendaUI
 {
     public partial class frmCliente : Form
     {
+        #region CRÉDITOS
+        /*
+         * Créditos ao Senhor Deus, por ter me sustentado.
+         * Créditos à Elaine Cristina Martins, minha Mãe.
+         * Créditos a mim, pela persistência.     
+        */
+        #endregion
+
         #region VARIAVEIS
         //variavel controladora para saber quando o registro está sendo alterado
         bool isAlteracao = false;
