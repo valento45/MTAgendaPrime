@@ -70,7 +70,6 @@ namespace AgendaUI
                             if (dgvClientes.RowCount > 0 && dgvClientes.SelectedRows != null)
                                 AtualizaDadosAlteradosGrid(Cliente);
                         }
-
                 }
             }
 
@@ -290,7 +289,7 @@ namespace AgendaUI
             if (e.ColumnIndex > 0 && e.RowIndex > 0)
                 ((DataGridView)sender).SelectedCells[e.ColumnIndex].ToolTipText = ((DataGridView)sender).SelectedCells[e.ColumnIndex].Value.ToString();
         }
-        //Thais BB
+        //Thais Bebê
         private void btnExcluir_Click(object sender, EventArgs e)
         {
             if (dgvClientes.RowCount > 0)
@@ -301,11 +300,11 @@ namespace AgendaUI
                 {
                     if (MessageBox.Show("Deseja realmente excluir o cliente selecionado ?", "Atenção", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     {
-                        Cliente = Cliente.GetById(cod);
+                        Cliente cliente_log = Cliente.GetById(cod);
                         if (Cliente.Delete(cod))
                         {
-                            LogCliente.Insert(TipoMovimento.Exclusao, DateTime.Now, Cliente);
-                            Cliente = null;
+                            LogCliente.Insert(TipoMovimento.Exclusao, DateTime.Now, cliente_log);
+
                             dgvClientes.Rows.RemoveAt(dgvClientes.SelectedRows[0].Index);
                             // MessageBox.Show("O cliente selecionado foi excluído.", "OK", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             //Insert log
@@ -325,7 +324,6 @@ namespace AgendaUI
             Cliente = null;
             isAlteracao = false;
             HabilitaDesabilitaAlteracao();
-
             txtNome.Clear();
             txtRg.Clear();
             txtCpf.Clear();
@@ -339,8 +337,7 @@ namespace AgendaUI
             txtTelefone.Clear();
             txtCelular.Clear();
             cmbTipoCliente.SelectedIndex = -1;
-
-            MessageBox.Show("Dados resetados!", "Novo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("Os campos foram limpos!", "Novo", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void btnNovo_Click(object sender, EventArgs e)

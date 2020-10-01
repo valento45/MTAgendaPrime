@@ -14,12 +14,7 @@ namespace AgendaBE
     {
         #region        VARIAVEIS
 
-
-
         #endregion
-
-
-
 
         #region Propriedades
         public int Id { get; set; }
@@ -44,7 +39,6 @@ namespace AgendaBE
         }
 
         #endregion
-
 
         #region Construtores
         public Cliente()
@@ -76,7 +70,6 @@ namespace AgendaBE
         }
         #endregion
 
-
         public bool Insert()
         {
             NpgsqlCommand cmd = new NpgsqlCommand("INSERT INTO a_agenda_tb (nome, rg, cpf, endereco, complemento, numero_celular, numero_telefone, tipo_cliente, observacao) VALUES (@nome, @rg, @cpf, @endereco, @complemento, @numero_celular, @numero_telefone, @tipo_cliente, @observacao) RETURNING id;");
@@ -89,7 +82,6 @@ namespace AgendaBE
             cmd.Parameters.AddWithValue(@"numero_telefone", Numero_telefone);
             cmd.Parameters.AddWithValue(@"tipo_cliente", Tipo_Cliente);
             cmd.Parameters.AddWithValue(@"observacao", Observacao);
-
             Id = Convert.ToInt32(Access.ExecuteScalar(cmd));
             return Id > 0;
         }
@@ -107,7 +99,6 @@ namespace AgendaBE
             cmd.Parameters.AddWithValue(@"numero_telefone", Numero_telefone);
             cmd.Parameters.AddWithValue(@"tipo_cliente", Tipo_Cliente);
             cmd.Parameters.AddWithValue(@"observacao", Observacao);
-
             return Access.ExecuteNonQuery(cmd);
         }
 
@@ -150,6 +141,7 @@ namespace AgendaBE
             else
                 return new Cliente();
         }
+
         public static List<Cliente> GetByCelular(string celular)
         {
             List<Cliente> result = new List<Cliente>();
@@ -186,18 +178,15 @@ namespace AgendaBE
             return result;
         }
 
-
         public static List<Cliente> GetAll(int limit = 100)
         {
             List<Cliente> result = new List<Cliente>();
-
             NpgsqlCommand cmd = new NpgsqlCommand("SELECT * FROM a_agenda_tb LIMIT " + limit);
-
             foreach (DataRow cliente in Access.ExecuteReader(cmd).Tables[0].Rows)
                 result.Add(new Cliente(cliente));
             return result;
         }
     }
 
-   
+
 }
