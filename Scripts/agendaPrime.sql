@@ -13,6 +13,20 @@ observacao text,
 constraint u_agenda_tb_pk primary key (id)
 );
 
+CREATE TABLE u_usuario_tb(
+id_usuario serial not null,
+nome text not null,
+rg text,
+cpf text,
+endereco text,
+complemento text,
+num_celular text,
+num_telefone text,
+usuario text,
+senha text,
+perfil int
+);
+
 
 CREATE TABLE a_historico_tb(
 id_log serial not null,
@@ -32,4 +46,6 @@ constraint u_log_tb_pk primary key (id_log),
 constraint u_agenda_tb_fk foreign key(id_registro)
 references a_agenda_tb(id)
 );
+
+--Modulos : a = cliente, Usuario =  u,
 
