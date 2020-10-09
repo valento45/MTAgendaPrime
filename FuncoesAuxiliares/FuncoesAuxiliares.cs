@@ -95,7 +95,20 @@ namespace FuncoesAuxiliares
             }
             throw new ArgumentException("Not found.", "description");
             // or return default(T);
-        }       
+        }
+
+
+
+        //private static void RealcaBordaControle(Control controlRealcar)
+        //{
+        //    if (controlRealcar != null)
+        //    {
+        //        Graphics g = ((Control)controlRealcar).CreateGraphics();
+        //        Rectangle bounds = ((Control)controlRealcar).DisplayRectangle;
+        //        ControlPaint.DrawBorder(g, bounds, Color.Red, ButtonBorderStyle.Solid);
+        //    }
+
+        //}
     }
     public enum MaskFilters : int
     {
@@ -108,4 +121,6 @@ namespace FuncoesAuxiliares
         [Description("(00)0000-0000")]
         Telefone = 3,
     }
+
+
 }

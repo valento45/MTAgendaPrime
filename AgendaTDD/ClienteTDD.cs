@@ -13,7 +13,6 @@ namespace AgendaTDD
     [TestFixture]
     public class ClienteTDD
     {
-
         //   string value;
 
         //SetUp defina o local onde será executado antes do teste propriamente.
@@ -37,15 +36,19 @@ namespace AgendaTDD
             if (value == null || value == string.Empty)
                 capturou = false;
 
-            else
+            else if (value.Length > 0)
+            {
                 for (int i = 0; i < value.Length; i++)
                     if (char.IsNumber(value[i]))
                     {
                         capturou = true;
                         break;
                     }
+            }
+            else
+                capturou = false;
 
-            Assert.IsTrue(capturou == esperadoValue);
+            Assert.That(capturou, Is.EqualTo(esperadoValue));
         }
 
         [Test]
@@ -53,17 +56,22 @@ namespace AgendaTDD
         [TestCase("#3!###################################################!tuvwxyz123456", "3123456")]
         [TestCase("#1#######!tuvwxyz123456", "1123456")]
         [TestCase("#1## ,.xz###  ,.;/'##!t         uvwxyz123456", "1123456")]
+        [TestCase(null, "")]
         public void SomenteNumeros(string value, string expectedValue)
         {
             string result = "";
-            try
-            {
-                foreach (char c in value)
-                    if (char.IsNumber(c))
-                        result += c;
+            if (value == null)
+                result = string.Empty;
+            else
+            {                
+                try
+                {
+                    foreach (char c in value)
+                        if (char.IsNumber(c))
+                            result += c;
+                }
+                catch { }
             }
-            catch { }
-            
            // Assert.IsTrue(result == expectedValue);
             Assert.That(result, Is.EqualTo(expectedValue));
         }
@@ -130,8 +138,13 @@ namespace AgendaTDD
         //    resultObtained = cpf.EndsWith(digito);            
         //    Assert.IsTrue(resultExpected == resultObtained);
         //}
-
-
+        [Test]
+        [TestCase(',',"Rua, Bairro, Cidade, UF", new string[] {"Rua", " Bairro", " Cidade", " UF" })]
+        public /*string[]*/ void GetArrayBySeparator (char separator, string texto, string[] expectedValue)
+        {
+            string[] result = texto.Split(separator);
+            Assert.That(result, Is.EqualTo(expectedValue));            
+        }
        
     }
 }

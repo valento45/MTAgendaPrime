@@ -64,6 +64,7 @@
             this.txtNome = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.tabConsultar = new System.Windows.Forms.TabPage();
+            this.btnHistA = new System.Windows.Forms.Button();
             this.btnExcluir = new System.Windows.Forms.Button();
             this.btnEditar = new System.Windows.Forms.Button();
             this.pnlFundo2 = new System.Windows.Forms.Panel();
@@ -88,7 +89,6 @@
             this.label13 = new System.Windows.Forms.Label();
             this.filtroNomePnl = new System.Windows.Forms.Panel();
             this.txtFiltro = new System.Windows.Forms.TextBox();
-            this.btnHistA = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabCadastrar.SuspendLayout();
             this.pnlFundo1.SuspendLayout();
@@ -259,9 +259,9 @@
             this.label12.AutoSize = true;
             this.label12.Location = new System.Drawing.Point(296, 85);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(39, 13);
+            this.label12.Size = new System.Drawing.Size(43, 13);
             this.label12.TabIndex = 16;
-            this.label12.Text = "Celular";
+            this.label12.Text = "Celular*";
             // 
             // txtTelefone
             // 
@@ -292,9 +292,9 @@
             this.label10.AutoSize = true;
             this.label10.Location = new System.Drawing.Point(206, 59);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(40, 13);
+            this.label10.Size = new System.Drawing.Size(44, 13);
             this.label10.TabIndex = 12;
-            this.label10.Text = "Cidade";
+            this.label10.Text = "Cidade*";
             // 
             // cmbUf
             // 
@@ -312,9 +312,9 @@
             this.label9.AutoSize = true;
             this.label9.Location = new System.Drawing.Point(124, 59);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(21, 13);
+            this.label9.Size = new System.Drawing.Size(25, 13);
             this.label9.TabIndex = 10;
-            this.label9.Text = "UF";
+            this.label9.Text = "UF*";
             // 
             // txtComplemento
             // 
@@ -344,9 +344,9 @@
             this.label7.AutoSize = true;
             this.label7.Location = new System.Drawing.Point(651, 36);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(34, 13);
+            this.label7.Size = new System.Drawing.Size(38, 13);
             this.label7.TabIndex = 6;
-            this.label7.Text = "Bairro";
+            this.label7.Text = "Bairro*";
             // 
             // txtNumero
             // 
@@ -360,9 +360,9 @@
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(578, 36);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(19, 13);
+            this.label6.Size = new System.Drawing.Size(23, 13);
             this.label6.TabIndex = 4;
-            this.label6.Text = "Nº";
+            this.label6.Text = "Nº*";
             // 
             // txtEndereco
             // 
@@ -376,9 +376,9 @@
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(92, 36);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(53, 13);
+            this.label5.Size = new System.Drawing.Size(57, 13);
             this.label5.TabIndex = 2;
-            this.label5.Text = "Endereço";
+            this.label5.Text = "Endereço*";
             // 
             // DadosClienteGroup
             // 
@@ -463,9 +463,9 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(110, 41);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
+            this.label1.Size = new System.Drawing.Size(39, 13);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Nome";
+            this.label1.Text = "Nome*";
             // 
             // tabConsultar
             // 
@@ -480,6 +480,19 @@
             this.tabConsultar.TabIndex = 1;
             this.tabConsultar.Text = "Pesquisar";
             this.tabConsultar.UseVisualStyleBackColor = true;
+            // 
+            // btnHistA
+            // 
+            this.btnHistA.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.btnHistA.Enabled = false;
+            this.btnHistA.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnHistA.Location = new System.Drawing.Point(292, 464);
+            this.btnHistA.Name = "btnHistA";
+            this.btnHistA.Size = new System.Drawing.Size(110, 23);
+            this.btnHistA.TabIndex = 6;
+            this.btnHistA.Text = "Hist. Alterações";
+            this.btnHistA.UseVisualStyleBackColor = true;
+            this.btnHistA.Click += new System.EventHandler(this.btnHistA_Click);
             // 
             // btnExcluir
             // 
@@ -714,19 +727,6 @@
             this.txtFiltro.Name = "txtFiltro";
             this.txtFiltro.Size = new System.Drawing.Size(502, 20);
             this.txtFiltro.TabIndex = 0;
-            // 
-            // btnHistA
-            // 
-            this.btnHistA.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.btnHistA.Enabled = false;
-            this.btnHistA.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnHistA.Location = new System.Drawing.Point(292, 464);
-            this.btnHistA.Name = "btnHistA";
-            this.btnHistA.Size = new System.Drawing.Size(110, 23);
-            this.btnHistA.TabIndex = 6;
-            this.btnHistA.Text = "Hist. Alterações";
-            this.btnHistA.UseVisualStyleBackColor = true;
-            this.btnHistA.Click += new System.EventHandler(this.btnHistA_Click);
             // 
             // frmCliente
             // 

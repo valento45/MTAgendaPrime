@@ -44,6 +44,13 @@ namespace AgendaUI
         {
             if (ValidaCampos())
             {
+                if (txtCpf.MaskCompleted)                
+                    if (!FuncoesAuxiliares.FuncoesAuxiliares.ValidaCPF(txtCpf.Text.SomenteNumeros()))
+                    {
+                        MessageBox.Show("CPF inválido! Verifique se digitou corretamente.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+                
                 //Se inclusão
                 if (!isAlteracao)
                 {
@@ -136,7 +143,7 @@ namespace AgendaUI
         {
             string[] camposObrigatorios = { "txtNome", "txtEndereco", "txtNumero", "txtBairro", "cmbUf", "txtCidade", "txtCelular" };
             string camposVazios = "";
-
+            List<Control> campos = new List<Control>();
             try
             {
                 foreach (Control ctrlInCtrl in this.pnlFundo1.Controls)
@@ -146,20 +153,30 @@ namespace AgendaUI
                         {
                             if (camposObrigatorios.Contains(ctrl.Name))
                                 if (((TextBox)ctrl).Text == string.Empty)
+                                {
                                     camposVazios += camposVazios == string.Empty ? ctrl.Name.Replace("txt", "") : ", " + ctrl.Name.Replace("txt", "");
+                                    campos.Add(ctrl as TextBox);
+                                }
+
                         }
 
                         else if (ctrl is ComboBox)
                         {
                             if (camposObrigatorios.Contains(ctrl.Name))
                                 if (((ComboBox)ctrl).Text == string.Empty)
+                                {
                                     camposVazios += camposVazios == string.Empty ? ctrl.Name.Replace("cmb", "") : ", " + ctrl.Name.Replace("cmb", "");
+                                    campos.Add(ctrl as ComboBox);
+                                }
                         }
                         else if (ctrl is MaskedTextBox)
                         {
                             if (camposObrigatorios.Contains(ctrl.Name))
                                 if (!((MaskedTextBox)ctrl).MaskCompleted)
+                                {
                                     camposVazios += camposVazios == string.Empty ? ctrl.Name.Replace("txt", "") : ", " + ctrl.Name.Replace("txt", "");
+                                    campos.Add(ctrl as MaskedTextBox);
+                                }
                         }
                     }
             }
@@ -168,6 +185,9 @@ namespace AgendaUI
             if (camposVazios != string.Empty)
             {
                 MessageBox.Show("Para prosseguir, verifique o preenchimento dos campos: \r\n" + camposVazios, "Validação", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                foreach (Control x in campos)
+                    RealcaBordaControle(x);
+
                 return false;
             }
             else
@@ -383,6 +403,18 @@ namespace AgendaUI
                 frmHistoricoA frm = new frmHistoricoA(id);
                 frm.ShowDialog();
             }
+        }
+
+        private void RealcaBordaControle(Control controlRealcar)
+        {
+
+            if (controlRealcar != null)
+            {
+                Graphics g = ((Control)controlRealcar).CreateGraphics();
+                Rectangle bounds = ((Control)controlRealcar).DisplayRectangle;
+                ControlPaint.DrawBorder(g, bounds, Color.Red, ButtonBorderStyle.Solid);
+            }
+
         }
     }
 }
